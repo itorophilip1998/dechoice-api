@@ -1,0 +1,20 @@
+@baseUrl = http://localhost:8000/api
+
+### Signup 
+POST {{baseUrl}}/signup HTTP/1.1
+content-type: application/json 
+
+{ 
+    "username":"wsqqqqqqqqaqqqqqq",
+    "email":"tests3@gmail.com",
+    "password":"password",
+    "repeat_password":"password"
+}
+
+
+### get
+GET {{baseUrl}}/me HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IndzcXFxcXFxcXFhcXFxcXFxIiwiZW1haWwiOiJ0ZXN0czNAZ21haWwuY29tIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJlcGVhdF9wYXNzd29yZCI6InBhc3N3b3JkIiwiaWF0IjoxNjQ1NzI4MjI3LCJleHAiOjE2NDU3MzAwMjd9.hcFF5pH9Q4_4LRudPCpNvRyEOQ-hGlZyPTpk9lFwoB0
+### get
+DELETE  {{baseUrl}}/signout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY0NTcyNTk5NywiZXhwIjoxNjQ1NzI3Nzk3fQ.im_8BQeq8H4RzwzvJfv_tz2EvMHB5uLvGeDHOipQAzc
