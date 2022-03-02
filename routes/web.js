@@ -1,6 +1,8 @@
-const express = require('express')
-const route = express.Router() 
+const express = require("express");
+const route = express.Router();
 
-route.get('/', (req, res) => res.send('Hello Web!'));
-module.exports=route;
-
+route.get("/", (req, res) => {
+  const data = { name: "itoro", gender: "male" };
+  res.render("home", { data });
+});
+module.exports = route;

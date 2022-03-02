@@ -1,39 +1,46 @@
 const express = require("express");
-const DB = require("./config/database");
 const web = require("./routes/web");
 const api = require("./routes/api");
 const channel = require("./routes/channel");
-const app=express();
-const cors = require("cors"); 
-require('dotenv').config();
-const port = process.env.PORT || 3000
+const exphbs = require("express-handlebars");
+const app = express();
+const cors = require("cors");
+require("dotenv").config();
+require("./config/database")();
+const port = process.env.PORT || 8000;
+ 
 
-// connect Db
-DB();
-
-// use  
-app.use(express.urlencoded({ extended: false })) 
-app.use(express.json())  
+// use
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(express.static("public"));
-app.set("views", "views");
+app.engine(
+  "hbs",
+  exphbs.engine({
+    defaultLayout: "main",
+    partialsDir: __dirname + "/views/partials/",
+    extname: ".hbs",
+  })
+);
 app.set("view engine", "hbs");
 app.use(cors());
-
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 // routes
-app.use("/",web);
-app.use("/api",api);
-app.use("/channel",channel); 
+app.use("/", web);
+app.use("/api", api);
+app.use("/channel", channel);
 
 // Express Error Handling
-app.get('*', (req, res, next) => {
-    res.render("pageNotFound")
-    next()
+app.get("*", (req, res, next) => {
+  res.render("pageNotFound");
+  next();
 });
 
 
-  
-
 // Port
-app.listen(port||8000,()=>{
-    console.log("App is running")
-})
+app.listen(port, () => {
+  console.log("App is running");
+});
