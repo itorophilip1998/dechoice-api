@@ -1,39 +1,40 @@
-const bcrypt = require('bcryptjs'); 
-const mongoose = require('mongoose'); 
+const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
 const Schema = new mongoose.Schema(
   {
-    username: String,
-    email: {
+    username: {
       type: String,
       unique: true,
     },
     password: String,
     refresh_token: {
       type: String,
-      default:null
+      default: null,
     },
+    chats: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Chat",
+      },
+    ],
     role: {
       type: String,
       enum: {
-        values: ['user', 'admin'],
+        values: ["user", "admin"],
       },
-      default:'user'
-
-    }
+      default: "user",
+    },
   },
   {
     timestamps: true,
   }
 );
 
-
-
- 
-Schema.pre('save',  function(next) {
+Schema.pre("save", function (next) {
   const hash = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
-  this.password=hash; 
+  this.password = hash;
   next();
-})
+});
 
-module.exports=mongoose.model("User",Schema);
+module.exports = mongoose.model("User", Schema);

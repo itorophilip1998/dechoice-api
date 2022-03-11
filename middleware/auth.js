@@ -4,7 +4,7 @@ require("dotenv").config();
 const { TOKEN_SECRET, TOKEN_REFRESH_SECRET } = process.env;
 
 exports.generateAccessToken = (user) => {
-  const access_token = jwt.sign({ user }, TOKEN_SECRET, { expiresIn: "10m" });
+  const access_token = jwt.sign({ user }, TOKEN_SECRET);
   return access_token;
 };
 
@@ -16,6 +16,7 @@ exports.generateRefreshToken = async (user) => {
   } catch (error) {}
 };
 
+
 exports.authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -24,7 +25,7 @@ exports.authenticateToken = (req, res, next) => {
   jwt.verify(token, TOKEN_SECRET, async (err, user) => {
     if (err) return res.sendStatus(403);
     try {
-      req.user = await User.findOne({ email: user.user }); 
+      req.user = await User.findOne({ username: user.user }); 
     } catch (error) {}
     next();
   });
@@ -43,7 +44,7 @@ exports.refreshToken = async (token) => {
     if (!userToken) return res.sendStatus(403);
      jwt.verify(token, TOKEN_SECRET, async (err, user) => {
        if (err) return res.sendStatus(403);
-        const access_token = generateAccessToken({ user : user.name});
+        const access_token = generateAccessToken({ user : user.user});
        return access_token;
      });
      

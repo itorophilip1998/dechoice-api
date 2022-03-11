@@ -11,25 +11,15 @@ const User = require("../model/User");
 const validator = async (data) => {
   try {
     const schema = Joi.object({
-      username: Joi.string().min(5).max(20).required(),
-      email: Joi.string().email().required(),
-      password: Joi.string().min(5).max(15).required(),
-      repeat_password: Joi.ref("password"),
+      username: Joi.string().min(5).max(8).required(), 
+      password: Joi.string().min(5).max(8).required()
     });
-    const { repeat_password, ...newData } = await schema.validateAsync(data, {
+    const newData  = await schema.validateAsync(data, {
       abortEarly: false,
     });
     return newData;
   } catch (error) {
     return error;
-    console.log(error);
-    //  const errors = [];
-    //  if (error) {
-    //    for (let item of error.details) {
-    //      errors.push({ field: item.path[0], msg: item.message });
-    //    }
-    //    res.status(422).send(errors);
-    //  }
   }
 };
 
@@ -38,10 +28,12 @@ exports.signup = async (req, res) => {
     await validator(req.body);
     await User.create(req.body)
       .then((result) => {
-        const { email, password } = result;
+        const { username, password } = result;
         // generate tokens
-        const access_token = generateAccessToken(email, password);
-        const refresh_token = generateRefreshToken(email, password);
+        const access_token = generateAccessToken(username, password);
+        const refresh_token = generateRefreshToken(username, password);
+        
+           console.log(result);
         res.json({
           result,
           access_token,
@@ -49,11 +41,7 @@ exports.signup = async (req, res) => {
         });
       })
       .catch((err) => {
-        const errors = [];
-        if (err.code === 11000) {
-          errors.push({ field: "email", msg: "email already exist" });
-          res.status(422).json({ errors });
-        }
+         res.send(err)
       });
   } catch (error) {}
 };
@@ -61,8 +49,8 @@ exports.signup = async (req, res) => {
 exports.signin = async (req, res) => {
   try {
     //   get user , verify email and password
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
     if (!user)
       return res.status(404).json({ msg: `this user is not registered` });
     const correctPassword = await compareSync(password, user.password);
@@ -70,8 +58,8 @@ exports.signin = async (req, res) => {
       return res.status(401).json({ msg: `invalid password` });
 
     // generate tokens
-    const access_token = generateAccessToken(user.email, user.password);
-    const refresh_token = generateRefreshToken(user.email, user.password);
+    const access_token = generateAccessToken(user.username, user.password);
+    const refresh_token = generateRefreshToken(user.username, user.password);
     res.json({
       user,
       access_token,

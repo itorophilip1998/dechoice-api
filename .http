@@ -5,10 +5,8 @@ POST {{baseUrl}}/signup HTTP/1.1
 content-type: application/json 
 
 { 
-    "username":"itoro",
-    "email":"Emmanuel229@gmail.com",
-    "password":"password",
-    "repeat_password":"password"
+    "username":"itor1o", 
+    "password":"password"
 }
 
 
@@ -17,13 +15,41 @@ POST {{baseUrl}}/signin HTTP/1.1
 content-type: application/json 
 
 {  
-    "email":"Emmanuel@gmail.com",
+   "username":"itor1o", 
     "password":"password"
 }
  
+### chat 
+POST {{baseUrl}}/chat HTTP/1.1
+content-type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyNTQ4fQ.vL-mqo6R1hax3h9PIqMtvvuBsib02XAzGfCmrYTMJrs
+
+{  
+   "message":"Helllo love ", 
+    "user_id":"622b67834340c43cae242161"
+}
+ 
+### chat Delete 
+DELETE {{baseUrl}}/chat/622b6b32709bcf2c88f405d9 HTTP/1.1
+content-type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyNTQ4fQ.vL-mqo6R1hax3h9PIqMtvvuBsib02XAzGfCmrYTMJrs
+
+{   
+   "user_id":"622b67834340c43cae242161"
+}
+
+### chat Get 
+GET {{baseUrl}}/chat HTTP/1.1
+content-type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyNTQ4fQ.vL-mqo6R1hax3h9PIqMtvvuBsib02XAzGfCmrYTMJrs
+ 
+ 
 ### Get User
 GET {{baseUrl}}/me HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiRW1tYW51ZWxAZ21haWwuY29tIiwiaWF0IjoxNjQ3MDA3MjU1LCJleHAiOjE2NDcwMDc4NTV9.rNop5AXxSW8vu8ds53uPFTIvMQ0gO4acg6eKNVBuPfI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyMTM4fQ.VadUaTiGlnfsEoYsmNNoCq6liC7KXkoSIU3FzYFHa54
+
+### Get User
+GET {{baseUrl}}/clear-all HTTP/1.1 
 
 ### Refresh Token
 POST {{baseUrl}}/refresh-token HTTP/1.1
