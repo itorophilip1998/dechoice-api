@@ -1,8 +1,7 @@
 const express = require("express");
 const route = express.Router();
 
-route.get("/", (req, res) => {
-  const data = { name: "itoro", gender: "male" };
-  res.render("home", { data });
-});
+route
+  .get('/', (req, res) => res.send('Api'));
+
 module.exports = route;

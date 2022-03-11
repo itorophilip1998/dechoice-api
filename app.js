@@ -42,5 +42,5 @@ app.get("*", (req, res, next) => {
 
 // Port
 app.listen(port, () => {
-  console.log("App is running");
+  console.log(`App is running ${port}`);
 });

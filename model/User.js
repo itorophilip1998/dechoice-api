@@ -1,21 +1,30 @@
-const bcrypt = require('bcryptjs');
-const Joi = require('joi');
+const bcrypt = require('bcryptjs'); 
 const mongoose = require('mongoose'); 
 
-const Schema = new mongoose.Schema({ 
-  username: String,
-  email: {
-      type:String,
-      unique:true
+const Schema = new mongoose.Schema(
+  {
+    username: String,
+    email: {
+      type: String,
+      unique: true,
+    },
+    password: String,
+    refresh_token: {
+      type: String,
+      default:null
+    },
+    role: {
+      type: String,
+      enum: {
+        values: ['user', 'admin'],
+      },
+      default:'user'
+
+    }
   },
-  password:  String ,
-  token:{
-    type: String
- }
-},
-{
-  timestamps:true
-}
+  {
+    timestamps: true,
+  }
 );
 
 
