@@ -1,11 +1,11 @@
-const Joi = require("joi"); 
+const Joi = require("joi");
 const Chat = require("../model/Chat");
-const User = require("../model/User"); 
+const User = require("../model/User");
 
 const validator = async (data) => {
   try {
     const schema = Joi.object({
-      message: Joi.string().required(),
+      message: Joi.string().required().trim(),
       user_id: Joi.string().required(),
     });
     const newData = await schema.validateAsync(data, {
@@ -19,53 +19,49 @@ const validator = async (data) => {
 
 exports.postChat = async (req, res) => {
   try {
-     const validate = await validator(req.body);
-    
-    await Chat.create(validate)
-        .then((result) => { 
-          console.log(result)
-        res.json({
-          result, 
-          msg: "Posted Chat Succesfully",
-        });
-      })
-        .catch((err) => { 
-          res.status(422).json({ err });
-      });
-  } catch (error) {}
-};
- 
+    const validate = await validator(req.body);
 
-exports.deletChat = async (req, res) => {
-  try {
-      const user_id = req.user; 
-    await Chat.deleteOne({ _id: req.params.id,user_id})
+    await Chat.create(validate)
       .then((result) => {
         res.json({
           result,
-          msg: "Delete Chat Succesfully",
+          msg: "Posted Chat Succesfully",
         });
       })
       .catch((err) => {
-        res.status(422).json({ error });
+        res.status(400).json({ err, msg: "Ops and error accured" });
       });
-  } catch (error) {}
+  } catch (err) {
+    res.status(402).json({ err, msg: "Ops and error accured" });
+  }
 };
- 
+
+exports.deletChat = async (req, res) => {
+  try {
+    const user_id = req.user._id; 
+    
+    const deleted = await Chat.findOneAndDelete({ _id: req.params.id,user_id })
+    res.json({
+      deleted,
+      msg: "Get Deleted Succesfully"
+    });
+  } catch (err) {
+    res.status(400).json({ err, msg: "Ops and error accured" });
+  }
+};
 
 exports.getChat = async (req, res) => {
-  try { 
-    await Chat.find({})
-      .then((result) => { 
-        res.json({
-          result, 
-          msg: "Get Chat Succesfully",
-        });
-      })
-      .catch((err) => {
-          res.status(422).json({ error });
-        
-      });
-  } catch (error) {}
+  try {
+    const users = await User.find({});
+    const chats = await Chat.find({});
+    res.json({
+      chats,
+      users,
+      msg: "Get Chat Succesfully",
+    });
+  } catch (err) {
+    res.status(402).json({ err, msg: "Ops and error accured" });
+  }
 };
- 
+
+

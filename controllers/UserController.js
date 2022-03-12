@@ -9,31 +9,28 @@ const {
 const User = require("../model/User");
 
 const validator = async (data) => {
-  try {
+ 
     const schema = Joi.object({
-      username: Joi.string().min(5).max(8).required(), 
-      password: Joi.string().min(5).max(8).required()
+      username: Joi.string().min(5).max(10).required(),
+      password: Joi.string().min(5).max(10).required(),
     });
-    const newData  = await schema.validateAsync(data, {
+    const newData = await schema.validateAsync(data, {
       abortEarly: false,
     });
     return newData;
-  } catch (error) {
-    return error;
-  }
 };
 
 exports.signup = async (req, res) => {
   try {
     await validator(req.body);
+    const getUser = await User.findOne({ username: req.body.username });
+    if (getUser) return res.json({ msg: "user Already exist" });
     await User.create(req.body)
       .then((result) => {
         const { username, password } = result;
         // generate tokens
         const access_token = generateAccessToken(username, password);
         const refresh_token = generateRefreshToken(username, password);
-        
-           console.log(result);
         res.json({
           result,
           access_token,
@@ -41,9 +38,11 @@ exports.signup = async (req, res) => {
         });
       })
       .catch((err) => {
-         res.send(err)
+        res.status(400).json({ err, msg: "Ops and error accured" });
       });
-  } catch (error) {}
+  } catch (err) {  
+    res.status(402).json({ err, msg: "Ops and error accured" });
+  }
 };
 
 exports.signin = async (req, res) => {
@@ -56,7 +55,6 @@ exports.signin = async (req, res) => {
     const correctPassword = await compareSync(password, user.password);
     if (!correctPassword)
       return res.status(401).json({ msg: `invalid password` });
-
     // generate tokens
     const access_token = generateAccessToken(user.username, user.password);
     const refresh_token = generateRefreshToken(user.username, user.password);
@@ -65,7 +63,9 @@ exports.signin = async (req, res) => {
       access_token,
       msg: "Login Succesfully",
     });
-  } catch (error) {}
+  } catch (err) { 
+  res.status(402).json({ err, msg: "Ops and error accured" });
+  }
 };
 
 exports.signout = (req, res) => {
@@ -74,13 +74,19 @@ exports.signout = (req, res) => {
     res.json({
       msg: "Logout Succesfully",
     });
-  } catch (error) {}
+  } catch (err) { 
+        res.status(402).json({ err, msg: "Ops and error accured" });
+
+  }
 };
 
 exports.me = async (req, res) => {
   try {
     res.send(await req.user);
-  } catch (error) {}
+  } catch (err) {
+     res.status(402).json({ err, msg: "Ops and error accured" });
+
+  }
 };
 
 exports.token = (req, res) => {
@@ -89,5 +95,8 @@ exports.token = (req, res) => {
     res.json({
       msg: "Token Refreshed Succesfully",
     });
-  } catch (error) {}
+  } catch (err) {
+     res.status(402).send({ err, msg: "Ops and error accured" });
+
+  }
 };

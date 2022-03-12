@@ -5,7 +5,7 @@ POST {{baseUrl}}/signup HTTP/1.1
 content-type: application/json 
 
 { 
-    "username":"itor1o", 
+    "username":"Itoro1", 
     "password":"password"
 }
 
@@ -15,42 +15,45 @@ POST {{baseUrl}}/signin HTTP/1.1
 content-type: application/json 
 
 {  
-   "username":"itor1o", 
+   "username":"Itoro", 
     "password":"password"
 }
  
 ### chat 
 POST {{baseUrl}}/chat HTTP/1.1
 content-type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyNTQ4fQ.vL-mqo6R1hax3h9PIqMtvvuBsib02XAzGfCmrYTMJrs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6eiIsImlhdCI6MTY0NzA4MDUwOH0.SNtUV7un5H7rii8EjWwpMLlgGOweI90qF_niBBy0cPk
 
 {  
-   "message":"Helllo love ", 
+   "message":"hate you2", 
     "user_id":"622b67834340c43cae242161"
 }
  
 ### chat Delete 
-DELETE {{baseUrl}}/chat/622b6b32709bcf2c88f405d9 HTTP/1.1
+DELETE {{baseUrl}}/chat/622b6adc709bcf2c88f405c7 HTTP/1.1
 content-type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyNTQ4fQ.vL-mqo6R1hax3h9PIqMtvvuBsib02XAzGfCmrYTMJrs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6eiIsImlhdCI6MTY0NzA4MDUwOH0.SNtUV7un5H7rii8EjWwpMLlgGOweI90qF_niBBy0cPk
 
 {   
-   "user_id":"622b67834340c43cae242161"
+    
+   "user_id":"622c73b80ba7741c9d7faad6"
 }
 
 ### chat Get 
-GET {{baseUrl}}/chat HTTP/1.1
-content-type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyNTQ4fQ.vL-mqo6R1hax3h9PIqMtvvuBsib02XAzGfCmrYTMJrs
+GET {{baseUrl}}/chat HTTP/1.1 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6eiIsImlhdCI6MTY0NzA4MDUwOH0.SNtUV7un5H7rii8EjWwpMLlgGOweI90qF_niBBy0cPk
+
  
- 
+
+### Clear Data 
+GET {{baseUrl}}/clear-all HTTP/1.1 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSXRvcm8iLCJpYXQiOjE2NDcwODQ3MDV9.CCTg61lnhJ0FKXB3xCtW4K6lkcchWvM4KZEugwrc4dA
+
 ### Get User
 GET {{baseUrl}}/me HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyMTM4fQ.VadUaTiGlnfsEoYsmNNoCq6liC7KXkoSIU3FzYFHa54
 
-### Get User
-GET {{baseUrl}}/clear-all HTTP/1.1 
-
+ 
 ### Refresh Token
 POST {{baseUrl}}/refresh-token HTTP/1.1
 content-type: application/json 
