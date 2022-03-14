@@ -26,7 +26,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6e
 
 {  
    "message":"hate you2", 
-    "user_id":"622b67834340c43cae242161"
+    "user_id":"622b67834340c43cae242161",
+    "username":"Itoro"
 }
  
 ### chat Delete 

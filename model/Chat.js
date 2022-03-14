@@ -8,7 +8,8 @@ const Schema = new mongoose.Schema(
     user_id: {
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }
+    },
+    username:String
   },
   {
     timestamps: true,
