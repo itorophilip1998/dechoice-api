@@ -19,7 +19,7 @@ const validator = async (data) => {
 exports.postChat = async (req, res) => {
   try {
     const validate = await validator(req.body);
-  const {_id, username} = await User.findOne({username:req.user})
+  const {_id, username} = await User.findOne({username:req.user.username})
     await Chat.create(
 {
       username,
