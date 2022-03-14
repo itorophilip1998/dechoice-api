@@ -5,9 +5,7 @@ const User = require("../model/User");
 const validator = async (data) => {
   try {
     const schema = Joi.object({
-      message: Joi.string().required().trim(),
-      user_id: Joi.string().required(),
-      username: Joi.string().required(),
+      message: Joi.string().required().trim()
     });
     const newData = await schema.validateAsync(data, {
       abortEarly: false,
