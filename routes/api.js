@@ -26,9 +26,13 @@ route // siwesfirm Routes Group
   .get("/siwesallfirm", create_siwesFirm);
  
 route // appliedFirm  Routes Group
-  .get("/appliedfirm/:user_id",authenticateToken, get_appliedFirm)
-  .post("/appliedfirm",authenticateToken, create_appliedFirm)
-  .delete("/appliedfirm",authenticateToken, delete_appliedFirm); 
+  .get("/appliedfirm/:user_id", authenticateToken, get_appliedFirm)
+  .post("/appliedfirm", authenticateToken, create_appliedFirm)
+  .delete(
+    "/appliedfirm/:user_id/:siwes_firm_id",
+    authenticateToken,
+    delete_appliedFirm
+  ); 
 
 route // uploadDocument  Routes Group
   .post("/upload-document",authenticateToken, create_document) 

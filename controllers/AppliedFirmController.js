@@ -54,7 +54,7 @@ exports.create_appliedFirm = async (req, res) => {
 };
 exports.delete_appliedFirm = async (req, res) => {
   try {
-      const { user_id, siwes_firm_id } = req.body;
+      const { user_id, siwes_firm_id } = req.params;
     await AppliedFirm.deleteOne({ user_id, siwes_firm_id })
       .then((result) => {
         res.json({
