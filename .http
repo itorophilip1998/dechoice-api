@@ -12,14 +12,14 @@ content-type: application/json
 
 
 ### Signin 
-POST {{baseUrl}}/signin HTTP/1.1
+GET {{baseUrl}}/appliedfirm/whjkdwhjdwjdjwdg2e HTTP/1.1
 content-type: application/json 
 
-{  
-  "name":"Itoro Philip", 
-    "email":"itoro@gmail.com",
-    "password":"password"
-}
+# {  
+#   "name":"Itoro Philip", 
+#     "email":"itoro@gmail.com",
+#     "password":"password"
+# }
  
 ### chat 
 GET  {{baseUrl}}/siwesfirm  HTTP/1.1 
