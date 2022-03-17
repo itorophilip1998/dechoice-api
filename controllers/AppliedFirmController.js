@@ -20,7 +20,7 @@ const validator = async (data) => {
 
 exports.get_appliedFirm = async (req, res) => {
   try {
-    const { user_id } = req.body; 
+    const { user_id } = req.params; 
     await AppliedFirm.find({user_id})
       .then((result) => {
         res.json({
