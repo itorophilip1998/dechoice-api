@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const SiwesFirm = require("../model/SiwesFirm");
+const Upload = require("../model/UploadDocument");
 const User = require("../model/User");
 
 const validator = async (data) => {
@@ -23,7 +23,8 @@ const validator = async (data) => {
 exports.create_document = async (req, res) => {
   try {
     const validate = await validator(req.body);
-    await SiwesFirm.create(req.body)
+
+    await Upload.create(validate)
       .then((result) => {
         res.json({
           result,

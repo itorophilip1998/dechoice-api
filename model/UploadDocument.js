@@ -13,4 +13,4 @@ const Schema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("UploadDocument", Schema);
+module.exports = mongoose.model("Upload", Schema);

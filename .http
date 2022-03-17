@@ -50,13 +50,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6e
 ### chat Get 
 POST {{baseUrl}}/upload-document HTTP/1.1 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6eiIsImlhdCI6MTY0NzA4MDUwOH0.SNtUV7un5H7rii8EjWwpMLlgGOweI90qF_niBBy0cPk
+content-type: application/json 
 
 {
-    department: "String",
-    school: "String",
-    firm_type: "String",
-    duration: "String",
-    user_id: "String"
+    "department":"comp since",
+    "school":"Comp",
+    "firm_type":"Hub",
+    "duration":"1-year",
+    "user_id":"09us9duisd"
 
 }
  
