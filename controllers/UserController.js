@@ -24,14 +24,14 @@ const validator = async (data) => {
 exports.signup = async (req, res) => {
   try {
     await validator(req.body);
-    const getUser = await User.findOne({ username: req.body.username });
+    const getUser = await User.findOne({ email: req.body.email });
     if (getUser) return res.json({ msg: "user Already exist" });
     await User.create(req.body)
       .then((result) => {
         const { username, password } = result;
         // generate tokens
-        const access_token = generateAccessToken(username, password);
-        const refresh_token = generateRefreshToken(username, password);
+        const access_token = generateAccessToken(email, password);
+        const refresh_token = generateRefreshToken(email, password);
         res.json({
           result,
           access_token,
@@ -57,8 +57,8 @@ exports.signin = async (req, res) => {
     if (!correctPassword)
       return res.status(401).json({ msg: `invalid password` });
     // generate tokens
-    const access_token = generateAccessToken(user.username, user.password);
-    const refresh_token = generateRefreshToken(user.username, user.password);
+    const access_token = generateAccessToken(user.email, user.password);
+    const refresh_token = generateRefreshToken(user.email, user.password);
     res.json({
       user,
       access_token,
