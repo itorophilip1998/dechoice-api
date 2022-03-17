@@ -1,6 +1,5 @@
 const Joi = require("joi");
 const AppliedFirm = require("../model/AppliedFirm"); 
-const SiwesFirm = require("../model/SiwesFirm");
 
 const validator = async (data) => {
   try {
@@ -21,8 +20,8 @@ const validator = async (data) => {
 
 exports.get_appliedFirm = async (req, res) => {
   try {
-    const { _id } = req.params; 
-    await SiwesFirm.find({_id})
+    const { user_id } = req.params; 
+    await AppliedFirm.find({user_id})
       .then((result) => {
         res.json({
           result,

@@ -26,7 +26,7 @@ route // siwesfirm Routes Group
   .get("/siwesallfirm", create_siwesFirm);
  
 route // appliedFirm  Routes Group
-  .get("/appliedfirm/:_id", authenticateToken, get_appliedFirm)
+  .get("/appliedfirm/:user_id", authenticateToken, get_appliedFirm)
   .post("/appliedfirm", authenticateToken, create_appliedFirm)
   .delete(
     "/appliedfirm/:user_id/:siwes_firm_id",
