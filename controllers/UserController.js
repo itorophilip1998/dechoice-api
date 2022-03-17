@@ -25,7 +25,7 @@ exports.signup = async (req, res) => {
   try {
     await validator(req.body);
     const getUser = await User.findOne({ email: req.body.email });
-    if (getUser) return res.json({ msg: "user Already exist" });
+    if (getUser) return res.status(404).json({ msg: "user Already exist" });
     await User.create(req.body)
       .then((result) => {
         const { username, password } = result;
