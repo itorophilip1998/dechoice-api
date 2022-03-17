@@ -64,7 +64,7 @@ content-type: application/json
  
 
 ### Clear Data 
-GET {{baseUrl}}/clear-all HTTP/1.1 
+GET {{baseUrl}}/siwesallfirm HTTP/1.1 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSXRvcm8iLCJpYXQiOjE2NDcwODQ3MDV9.CCTg61lnhJ0FKXB3xCtW4K6lkcchWvM4KZEugwrc4dA
 
 ### Get User
