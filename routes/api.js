@@ -23,7 +23,7 @@ route // Auth Group
 
 route // siwesfirm Routes Group
   .get("/siwesfirm", authenticateToken, get_siwesFirm)
-  .post("/siwesfirm", create_siwesFirm);
+  .get("/siwesfirm", create_siwesFirm);
  
 route // appliedFirm  Routes Group
   .get("/appliedfirm",authenticateToken, get_appliedFirm)
