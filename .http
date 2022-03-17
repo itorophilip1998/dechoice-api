@@ -5,7 +5,8 @@ POST {{baseUrl}}/signup HTTP/1.1
 content-type: application/json 
 
 { 
-    "username":"Itoro1", 
+    "name":"Itoro Philip", 
+    "email":"itoro@gmail.com",
     "password":"password"
 }
 
@@ -20,16 +21,22 @@ content-type: application/json
 }
  
 ### chat 
-POST {{baseUrl}}/chat HTTP/1.1
+GET  {{baseUrl}}/siwesfirm  HTTP/1.1 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDc0NzI5Mzd9.7leMDDTIfV2Qp8KFHIIZXhM83yiVjhkDfyO4XD-wZ_U
+
+
+
+### chat 
+GET  {{baseUrl}}/appliedfirm  HTTP/1.1
 content-type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6eiIsImlhdCI6MTY0NzA4MDUwOH0.SNtUV7un5H7rii8EjWwpMLlgGOweI90qF_niBBy0cPk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDc0NzI5Mzd9.7leMDDTIfV2Qp8KFHIIZXhM83yiVjhkDfyO4XD-wZ_U
 
 {  
-   "message":"hate you2", 
-    "user_id":"622b67834340c43cae242161",
-    "username":"Itoro"
+    "user_id":"623270fd04592050b4946ea4",
+    "siwes_firm_id":"623271c504592050b4946eb1"
 }
- 
+    
+
 ### chat Delete 
 DELETE {{baseUrl}}/chat/622b6adc709bcf2c88f405c7 HTTP/1.1
 content-type: application/json 
@@ -41,9 +48,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6e
 }
 
 ### chat Get 
-GET {{baseUrl}}/chat HTTP/1.1 
+POST {{baseUrl}}/upload-document HTTP/1.1 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRrZXl6eiIsImlhdCI6MTY0NzA4MDUwOH0.SNtUV7un5H7rii8EjWwpMLlgGOweI90qF_niBBy0cPk
 
+{
+    department: "String",
+    school: "String",
+    firm_type: "String",
+    duration: "String",
+    user_id: "String"
+
+}
  
 
 ### Clear Data 
@@ -52,7 +67,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSXRvcm8iL
 
 ### Get User
 GET {{baseUrl}}/me HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaXRvcjFvIiwiaWF0IjoxNjQ3MDEyMTM4fQ.VadUaTiGlnfsEoYsmNNoCq6liC7KXkoSIU3FzYFHa54
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDc0NzI5Mzd9.7leMDDTIfV2Qp8KFHIIZXhM83yiVjhkDfyO4XD-wZ_U
 
  
 ### Refresh Token

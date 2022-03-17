@@ -11,8 +11,9 @@ const User = require("../model/User");
 const validator = async (data) => {
  
     const schema = Joi.object({
-      username: Joi.string().min(5).max(10).required(),
-      password: Joi.string().min(5).max(10).required(),
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
     });
     const newData = await schema.validateAsync(data, {
       abortEarly: false,

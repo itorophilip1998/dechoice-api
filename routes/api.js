@@ -1,4 +1,7 @@
 const express = require("express");
+const { get_appliedFirm, create_appliedFirm, delete_appliedFirm } = require("../controllers/AppliedFirmController"); 
+const { get_siwesFirm, create_siwesFirm } = require("../controllers/SiwesFirmController");
+const { create_document } = require("../controllers/UploadDocumentController");
 const {
   signin,
   signup,
@@ -6,15 +9,8 @@ const {
   me,
   token,
 } = require("../controllers/UserController");
-const {
-  postChat,
-  deletChat,
-  getChat,
-} = require("../controllers/ChatController");
-const { authenticateToken } = require("../middleware/auth");
-const User = require("../model/User");
-const Chat = require("../model/Chat");
-const { json } = require("body-parser");
+ 
+const { authenticateToken } = require("../middleware/auth"); 
 const route = express.Router();
 
 route // Auth Group
@@ -25,20 +21,16 @@ route // Auth Group
   .post("/refresh-token", token)
   .get("/", (req, res) => res.send("Api"));
 
-route // Chat Group
-  .post("/chat", authenticateToken, postChat)
-  .delete("/chat/:id", authenticateToken, deletChat)
-  .get("/chat", authenticateToken, getChat);
+route // siwesfirm Routes Group
+  .get("/siwesfirm", authenticateToken, get_siwesFirm)
+  .post("/siwesfirm", create_siwesFirm);
+ 
+route // appliedFirm  Routes Group
+  .get("/appliedfirm",authenticateToken, get_appliedFirm)
+  .post("/appliedfirm",authenticateToken, create_appliedFirm)
+  .delete("/appliedfirm",authenticateToken, delete_appliedFirm); 
 
-route.get("/clear-all", authenticateToken, async (req, res) => {
-  try {
-    if (req && req.user.username === "Itoro") {
-      await User.deleteMany();
-      await Chat.deleteMany();
-      res.json({ msg: "cleared", username: req.user.username });
-    } else res.status(400).json({ msg: "Not Authorized" });
-  } catch (err) {
-    res.status(402).json({ err, msg: "Ops and error accured" });
-  }
-});
+route // uploadDocument  Routes Group
+  .post("/upload-document",authenticateToken, create_document) 
+
 module.exports = route;

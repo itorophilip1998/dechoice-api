@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 
 const Schema = new mongoose.Schema(
   {
-    username: {
+    name: String,
+    email: {
       type: String,
       unique: true,
     },
@@ -12,12 +13,7 @@ const Schema = new mongoose.Schema(
       type: String,
       default: null,
     },
-    chats: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Chat",
-      },
-    ],
+    
     role: {
       type: String,
       enum: {
